@@ -1,6 +1,6 @@
 # Jai.vim
 
-Syntax highlighting for [Jonathan Blow's](https://twitter.com/j_blow) programming language **Jai**.
+Syntax highlighting for [Jonathan Blow's](https://twitter.com/Jonathan_Blow) programming language **Jai**.
 
 ## Configuration
 
