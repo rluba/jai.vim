@@ -74,7 +74,10 @@ function! GetJaiIndent(lnum)
         if opening_linenum > 0 
             let opening_line = getline(opening_linenum)
             echom opening_line
-            if opening_line =~ '==\s*{\s*'
+						"First checks if there is a '{' on a newline
+						if opening_line =~ '^\s*{\s*'
+								let ind = indent(opening_linenum)
+						elseif opening_line =~ '==\s*{\s*'
                 echom "Matched!"
                 " Seems like this was an if/case, so put indentation back at
                 " the same level as before opening, no matter how we indented the case statements.
