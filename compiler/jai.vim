@@ -38,8 +38,18 @@ function! FindJaiCompiler()
 	endif
 endfunction
 
+let s:backend_flag = "-x64"
+if !has("win64")
+    let arch = system('uname -m')
+    if arch =~ 'x86_64'
+        " x64 is fine
+    else
+        let s:backend_flag = "-llvm"
+    endif
+endif 
+
 function! GetJaiMakeprg()
-    return FindJaiCompiler() . " -no_color -quiet -x64 " . FindJaiEntrypoint(expand('%'))
+    return FindJaiCompiler() . " -no_color -quiet " . s:backend_flag . " " . FindJaiEntrypoint(expand('%'))
 endfunction
 
 function! UpdateJaiMakeprg()
