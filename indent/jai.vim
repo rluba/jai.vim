@@ -70,19 +70,19 @@ function! GetJaiIndent(lnum)
         " Find corresponding opening line and check if it’s an if/case
         call cursor(a:lnum, col('.') - 1)
         let opening_linenum = searchpair('{', '', '}', 'bW', 'synIDattr(synID(line("."), col("."), 0), "name") =~? "string"')
-        echom "Opened at" opening_linenum
+        " echom "Opened at" opening_linenum
         if opening_linenum > 0 
             let opening_line = getline(opening_linenum)
-            echom opening_line
+            " echom opening_line
 						"First checks if there is a '{' on a newline
 						if opening_line =~ '^\s*{\s*'
 								let ind = indent(opening_linenum)
 						elseif opening_line =~ '==\s*{\s*'
-                echom "Matched!"
+                " echom "Matched!"
                 " Seems like this was an if/case, so put indentation back at
                 " the same level as before opening, no matter how we indented the case statements.
                 let ind = indent(opening_linenum)
-                echom "Indenting at" ind
+                " echom "Indenting at" ind
             endif 
         endif
     elseif line =~ 'case\s*\S*;'
