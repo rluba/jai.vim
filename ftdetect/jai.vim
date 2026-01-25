@@ -1,1 +1,1 @@
-au BufNewFile,BufRead *.jai set filetype=jai
+au BufNewFile,BufRead *.jai setfiletype jai
