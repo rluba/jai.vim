@@ -56,12 +56,13 @@ function! GetJaiIndent(lnum)
     let ind = indent(prev)
 
     if prevline =~ '\v[\(\{\[]\s*$'
-        let ind += s:indent_value('default')
         if line =~ 'case\s*\S*;'
-            let ind += s:indent_value('case_labels')
+            let ind += s:indent_value('case_labels') * 2
+        else
+            let ind += s:indent_value('default')
         endif
     elseif prevline =~ 'case\s*\S*;'
-        let ind += s:indent_value('default')
+        let ind += s:indent_value('case_labels')
     endif
 
     if line =~ '\v^\s*[\)\}\]]'
@@ -86,7 +87,7 @@ function! GetJaiIndent(lnum)
             endif 
         endif
     elseif line =~ 'case\s*\S*;'
-        let ind -= s:indent_value('default')
+        let ind -= s:indent_value('case_labels')
     endif
 
     return ind
