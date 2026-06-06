@@ -2,6 +2,7 @@ if exists("b:did_indent")
   finish
 endif
 let b:did_indent = 1
+let b:caseregex = '\v^\s*case\s+.{-};\s*$'
 
 setlocal nosmartindent
 setlocal nolisp
@@ -56,12 +57,13 @@ function! GetJaiIndent(lnum)
     let ind = indent(prev)
 
     if prevline =~ '\v[\(\{\[]\s*$'
-        if line =~ 'case\s*\S*;'
+        if line =~ b:caseregex
             let ind += s:indent_value('case_labels') * 2
+            echom "Case Match! nocheckin"
         else
             let ind += s:indent_value('default')
         endif
-    elseif prevline =~ 'case\s*\S*;'
+    elseif prevline =~ b:caseregex
         let ind += s:indent_value('case_labels')
     endif
 
@@ -86,7 +88,7 @@ function! GetJaiIndent(lnum)
                 " echom "Indenting at" ind
             endif 
         endif
-    elseif line =~ 'case\s*\S*;'
+    elseif line =~ b:caseregex
         let ind -= s:indent_value('case_labels')
     endif
 
