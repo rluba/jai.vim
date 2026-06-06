@@ -59,7 +59,6 @@ function! GetJaiIndent(lnum)
     if prevline =~ '\v[\(\{\[]\s*$'
         if line =~ b:caseregex
             let ind += s:indent_value('case_labels') * 2
-            echom "Case Match! nocheckin"
         else
             let ind += s:indent_value('default')
         endif
