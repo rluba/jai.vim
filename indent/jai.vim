@@ -2,7 +2,7 @@ if exists("b:did_indent")
   finish
 endif
 let b:did_indent = 1
-let b:caseregex = '\v^\s*case\s+.{-};\s*$'
+let b:caseregex = '\v^\s*case(\s+.{-})?;\s*$'
 
 setlocal nosmartindent
 setlocal nolisp
