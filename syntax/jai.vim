@@ -67,8 +67,9 @@ syntax match jaiFunction "\v<\h\w*>\ze\_s*:[:=]%(\_s*inline)?\_s*\(%(\.\{|\_[^\{
 "The lookahead prevents accidental matches with a function
 syntax match jaiConstantDeclaration "\v<\h\w*%(\\\s*\w+)*>\ze%(,\_s*<\h\w*%(\\\s*\w+)*>)*\_s*:\_[^{;:="]{-}:%(\.\{|\_[^{;:])*;" display
 "The lookahead prevents accidental matches with a constant declaration or a function
-syntax match jaiVariableDeclaration "\v%(%([:\]$]|for%(\_s*\<)?)\_s*)@<!<\h\w*%(\\\s*\w+)*>\ze%(,\_s*<\h\w*%(\\\s*\w+)*>)*\_s*:\_[^:=,"]{-}[=,);]" display
-syntax match jaiForVariableDeclaration "\v%(for%(\_s*\<)?%(\_s*<\h\w*%(\\\s*\w+)*>,)*\_s*)@<=<\h\w*%(\\\s*\w+)*>\ze%(,\_s*<\h\w*%(\\\s*\w+)*>)*\_s*:" display
+"The lookbehinds stay on the current line so that a preceding comment (which may end with any character, e.g. ':') cannot suppress a declaration on the following line
+syntax match jaiVariableDeclaration "\v%(%([:\]$]|for%(\s*\<)?)\s*)@<!<\h\w*%(\\\s*\w+)*>\ze%(,\_s*<\h\w*%(\\\s*\w+)*>)*\_s*:\_[^:=,"]{-}[=,);]" display
+syntax match jaiForVariableDeclaration "\v%(for%(\s*\<)?%(\s*<\h\w*%(\\\s*\w+)*>,)*\s*)@<=<\h\w*%(\\\s*\w+)*>\ze%(,\_s*<\h\w*%(\\\s*\w+)*>)*\_s*:" display
 syntax match jaiTagNote "@\<\w\+\>" display
 
 syntax match jaiClass "\v<[A-Z]\w+>" display
